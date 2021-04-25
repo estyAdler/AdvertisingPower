@@ -1,0 +1,159 @@
+<div>
+
+  <a mat-stroked-button href="../../../assets/building/שאלון לדיירים.pdf" download> הורדת שאלון לדיירים </a>
+</div>
+<div>
+  <!-- <h1 id="title">ענה לנו על מספר שאלות חשובות:</h1> -->
+  <!-- <h2 id="title">סוג האוכלוסיה בבנין:</h2> -->
+  <h1 id="title">מלא את הפרטים לפי השאלונים</h1>
+
+  <!-- <button (click)="printd()">print</button> -->
+</div>
+
+<form [formGroup]="buildForm" class="frm">
+
+  <mat-accordion class="example-headers-align">
+    <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          לאום
+        </mat-panel-title>
+        <mat-panel-description>
+          בחר סוג לאום
+          <mat-icon>group</mat-icon>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+
+      <mat-form-field appearance="fill">
+        <mat-label>לאום</mat-label>
+        <mat-select formControlName="nation">
+          <mat-option value="jude">יהודי</mat-option>
+          <mat-option value="arab">ערבי</mat-option>
+          <mat-option value="mix">מעורב</mat-option>
+          <mat-option value="another">אחר</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+
+      <mat-action-row>
+        <button mat-button color="primary" (click)="nextStep()">הבא</button>
+      </mat-action-row>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)" hideToggle>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          גיל
+        </mat-panel-title>
+        <mat-panel-description>
+          הכנס מס' משפחות
+          <mat-icon>map</mat-icon>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+
+      <mat-form-field>
+        <mat-label>זוגות צעירים עד 25</mat-label>
+        <input matInput type="number" min="1" formControlName="a25">
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>משפחות מגיל 25-40</mat-label>
+        <input matInput type="number" min="1" formControlName="a25_40">
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>משפחות מגיל 40-60</mat-label>
+        <input matInput type="number" min="1" formControlName="a40_60">
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>משפחות מגיל 60 +</mat-label>
+        <input matInput type="number" min="1" formControlName="a60">
+      </mat-form-field>
+
+      <mat-action-row>
+        <button mat-button color="warn" (click)="prevStep()">הקודם</button>
+        <button mat-button color="primary" (click)="nextStep()">הבא</button>
+      </mat-action-row>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel [expanded]="step === 2" (opened)="setStep(2)" hideToggle>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          תחומי התענינות
+        </mat-panel-title>
+        <mat-panel-description>
+          אילו תחומים מענינים את הדיירים בבנין
+          <mat-icon>date_range</mat-icon>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <mat-form-field appearance="fill">
+        <mat-label>תחומי התענינות</mat-label>
+        <mat-select formControlName="category" multiple>
+          <mat-select-trigger>
+            {{this.buildForm.controls.category.value ? this.buildForm.controls.category.value[0] : ''}}
+            <span *ngIf="this.buildForm.controls.category.value?.length > 1" class="example-additional-selection">
+              (+{{buildForm.controls.category.value.length - 1}}
+              {{buildForm.controls.category.value?.length === 2 ? 'other' : 'others'}})
+            </span>
+          </mat-select-trigger>
+          <mat-option *ngFor="let c of categoriesList" [value]="c">{{c}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <!-- <mat-form-field>
+        <mat-label>Date</mat-label>
+        <input matInput [matDatepicker]="picker" (focus)="picker.open()" readonly>
+      </mat-form-field>
+      <mat-datepicker #picker></mat-datepicker> -->
+
+      <mat-action-row>
+        <button mat-button color="warn" (click)="prevStep()">הקודם</button>
+        <button mat-button color="primary" (click)="nextStep()">הבא</button>
+      </mat-action-row>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel [expanded]="step === 3" (opened)="setStep(3)" hideToggle>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          שפה
+        </mat-panel-title>
+        <mat-panel-description>
+          מהי השפה המדוברת בבנין
+          <mat-icon>language</mat-icon>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <mat-select formControlName="language">
+        <mat-option value="hebrew">עברית</mat-option>
+        <mat-option value="english">אנגלית</mat-option>
+        <mat-option value="arab">ערבית</mat-option>
+        <mat-option value="another">אחר</mat-option>
+      </mat-select>
+      <mat-action-row>
+        <button mat-button color="warn" (click)="prevStep()">הקודם</button>
+        <button mat-button color="primary" (click)="nextStep()">הבא</button>
+      </mat-action-row>
+    </mat-expansion-panel>
+    <mat-expansion-panel [expanded]="step === 4" (opened)="setStep(4)" hideToggle>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          כמות מודעות
+        </mat-panel-title>
+        <mat-panel-description>
+          כמות מודעות ממוצעת בבנין עד היום
+          <mat-icon>map</mat-icon>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+
+      <mat-form-field>
+        <mat-label>כמות</mat-label>
+        <input matInput type="number" min="1" formControlName="numberposters">
+      </mat-form-field>
+
+      <mat-action-row>
+        <button mat-button color="warn" (click)="prevStep()">הקודם</button>
+        <button mat-button color="primary" (click)="sendData()">סיום</button>
+      </mat-action-row>
+    </mat-expansion-panel>
+
+  </mat-accordion>
+</form>

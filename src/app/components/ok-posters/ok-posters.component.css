@@ -1,0 +1,24 @@
+.example-card {
+    max-width: 200px;
+  }
+  
+  .example-header-image {
+background-image:url('../../../assets/business/0.svg');
+    background-size: cover;
+  }
+  #ok{
+      background-color: rgb(118, 238, 118);
+      color:green
+  }
+  #not{
+    background-color: rgb(230, 128, 128);
+    color:red
+}
+#mail{
+  background-color: rgb(118, 238, 118);
+  color:green;
+ /* width: 200px; */
+}
+/* .example-card :hover{
+  transform: rotate(10deg) scale(1);
+} */

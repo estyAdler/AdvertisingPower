@@ -1,0 +1,44 @@
+<label *ngFor="let b of buildings; let i=index">
+    <button mat-stroked-button color="primary" *ngIf="b.ID!=0" (click)="getPosters(b,i)" class="btn">{{b.street}}
+        {{b.Building_number}}</button>
+</label>
+<div *ngIf="dispOk==false&&dispBoard==true">
+    <br>
+    <mat-label>לוח המודעות של {{building.street}}
+        {{building.Building_number}}</mat-label>
+    <br>
+    <div>מודעות פרסום</div>
+    <label class="posters" *ngFor="let p of businessPosters; let i=index">
+        <mat-card class="example-card">
+            <img mat-card-image src="{{p.link}}">
+        </mat-card>
+    </label>
+    <div>מודעות בנין</div>
+    <label class="posters" *ngFor="let p of buildPosters; let i=index">
+        <mat-card class="example-card">
+            <img mat-card-image src="{{p.link}}">
+        </mat-card>
+    </label>
+    <div class="try">
+        <div class="example-container">
+            <h2>מודעות מיועדות להכנסה בלוח</h2>
+            <div cdkDropList #todoList="cdkDropList" [cdkDropListData]="allPosters"
+                [cdkDropListConnectedTo]="[doneList]" class="example-list" (cdkDropListDropped)="drop($event)">
+                <img class="example-box" *ngFor="let item of allPosters" cdkDrag src="{{item.link}}">
+            </div>
+        </div>
+        <button mat-stroked-button id="send" (click)="sendToBuild()" *ngIf="this.allPosters.length==0">אשור
+            הלוח</button>
+        <h2>הלוח המעוצב</h2>
+        <mat-grid-list cols="4" rowHeight="100px" colWidth="100px" cdkDropList #doneList="cdkDropList"
+            [cdkDropListData]="board" [cdkDropListConnectedTo]="[todoList]" class="example-list-board"
+            (cdkDropListDropped)="drop($event)">
+            <mat-grid-tile *ngFor="let poster of board" cdkDrag [colspan]="poster.col" [rowspan]="poster.rrow">
+                <img src="{{poster.link}}" class="img">
+            </mat-grid-tile>
+        </mat-grid-list>
+    </div>
+</div>
+<div *ngIf="dispOk==true">
+    <button mat-stroked-button id="ok" (click)="ok()">אשור כל לוחות המודעות והכנסתם לבנינים</button>
+</div>

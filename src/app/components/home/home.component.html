@@ -1,0 +1,32 @@
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <ul class="nav navbar-nav">
+      <li class="active"><a>Advertising power</a></li>
+    </ul>
+    <ul class="nav navbar-nav">
+      <li><a [routerLink]="['/impression']">להתרשמות מהלוח</a></li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <li *ngIf="!cs.status||cs.status==0"><a [routerLink]="['/']"><button (click)="this.clickLogin = true;
+        this.clickRegister = false"><span class="glyphicon glyphicon-user"></span>
+            כניסת
+            משתמש
+            רשום</button></a></li>
+      <li *ngIf="cs.status&&cs.status!=0"><a [routerLink]="['/']"><button (click)="logout()"><span
+              class="glyphicon glyphicon-user"></span>התנתקות</button></a>
+      </li>
+      <li>
+        <a [routerLink]="['/']"><button (click)="this.clickRegister = true;
+        this.clickLogin=false;this.cs.status = 0"><span class="glyphicon glyphicon-log-in"></span>כניסת
+            משתמש
+            חדש</button>
+        </a>
+      </li>
+    </ul>
+  </div>
+</nav>
+<app-login (changeStatus)="onStatusChange($event)" *ngIf="clickLogin"></app-login>
+<app-register (changeStatus)="onStatusChange($event)" *ngIf="clickRegister"></app-register>
+<app-home-builder *ngIf="cs.status==2" [cs]="cs"></app-home-builder>
+<app-home-business *ngIf="cs.status==3" [cs]="cs"></app-home-business>
+<app-home-designer *ngIf="cs.status==1" [cs]="cs"></app-home-designer>

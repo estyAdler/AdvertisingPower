@@ -1,0 +1,10 @@
+<div>{{message}}</div>
+<label class="card fa-icon-image" *ngFor="let p of oldPosters; let i=index">
+    <mat-card class="example-card" (click)="changeSize(i)">
+        <img mat-card-image src="{{p.link}}" id="card{{i}}"  height="100%" width="100%">
+        <p>{{p.size}}</p>
+        <p *ngIf="p.num_week>1">נותרו עוד: {{p.num_week}} שבועות</p>
+        <p *ngIf="p.num_week===1">נותר עוד שבוע אחד</p>
+    </mat-card>
+</label>
+

@@ -1,0 +1,115 @@
+.example-card {
+  max-width: 200px;
+}
+
+.example-headers-align{
+  width:500%;
+  text-align: center;
+  position: relative;
+}
+.example-headers-align .mat-expansion-panel-header-title,
+.example-headers-align .mat-expansion-panel-header-description {
+  flex-basis: 0;
+}
+
+.example-headers-align .mat-expansion-panel-header-description {
+  justify-content: space-between;
+  align-items: center;
+}
+
+.example-headers-align .mat-form-field + .mat-form-field {
+  margin-left: 8px;
+}
+.example-additional-selection {
+  opacity: 0.75;
+  font-size: 0.75em;
+}
+
+
+ input {
+    display: none;
+  }
+  
+  .image-upload-container {
+    cursor: pointer;
+  }
+  
+  .img-preview-container {
+    background-color: #f7f7f7;
+    position: relative;
+  }
+    .img-preview {
+      background: center center no-repeat;
+      background-size: contain;
+      height: 116px;
+      width: 116px;
+    }
+    /*   &-error {
+        display: none;
+    }
+       */
+  
+  
+   .img-loading-overlay {
+      background-color: black;
+      bottom: 0;
+      left: 0;
+      opacity: .2;
+      position: absolute;
+      right: 0;
+      top: 0;
+  }
+  
+  .img-spinning-circle {
+    display: inline-block;
+    width: 64px;
+    height: 64px;
+    margin: auto;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+  }
+  .img-spinning-circle:after {
+    content: " ";
+    display: block;
+    width: 46px;
+    height: 46px;
+    margin: 1px;
+    border-radius: 50%;
+    border: 5px solid #fff;
+    border-color: #fff transparent #fff transparent;
+    animation: lds-dual-ring 1.2s linear infinite;
+  }
+  @keyframes lds-dual-ring {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  
+  /* .btn-bwm {
+    background-color: $main-color;
+    border-color: $main-color;
+    color: white;
+    padding: 15px 30px;
+    font-size: 20px;
+  
+    &:hover, &:focus, &:active {
+      border-color: $main-color !important;
+      background-color: $main-color !important;
+    }
+    } */
+    .modal-header
+    {
+        background:#e7a6a6;
+        color:white;
+    }
+    .btn-default
+{
+    background:#e7a6a6;
+    color:white;
+}

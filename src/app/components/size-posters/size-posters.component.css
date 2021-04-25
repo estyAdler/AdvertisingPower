@@ -1,0 +1,19 @@
+ #table {
+  width:80%;
+text-align: center;
+position: relative;
+    /* left: 300px; */
+    right: 10%;
+  }
+  #new {
+    width:80%;
+  text-align: center;
+  position: relative;
+      /* left: 250px; */
+      right: 10%;
+    }
+
+  .th{
+    text-align: center;
+  }
+

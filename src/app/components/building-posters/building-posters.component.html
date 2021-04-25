@@ -1,0 +1,61 @@
+<h1 id="title">מודעות הבנין שלנו!!!!! </h1>
+<div>
+  <form [formGroup]="buildingPosterForm" class="frm">
+    <div class="example-container">
+      <!-- <mat-form-field appearance="fill">
+        <mat-label>לאום</mat-label>
+        <mat-select formControlName="status">
+          <mat-option value="mazalTov">מודעות מזל טוב</mat-option>
+          <mat-option value="arab">מודעות ועד בית</mat-option>
+          <mat-option value="mix">מודעות כלליות</mat-option>
+        </mat-select>
+      </mat-form-field> -->
+    </div>
+
+    <!-- <mdb-file-upload (fileRemoved)="onFileRemove()" (fileAdded)="onFileAdd($event)"></mdb-file-upload>-->
+    <label class="image-upload-container btn btn-outline-primary">
+      <span>בחר מודעה</span>
+      <input #imageInput type="file" accept="image/*" (change)="processFile(imageInput)">
+    </label>
+    <div *ngIf="selectedFile" class="img-preview-container">
+      <div class="img-preview{{selectedFile.status === 'fail' ? '-error' : ''}}"
+        [ngStyle]="{'background-image': 'url('+ selectedFile.src + ')'}">
+      </div>
+      <div *ngIf="selectedFile.pending" class="img-loading-overlay">
+        <div class="img-spinning-circle"></div>
+      </div>
+      <div *ngIf="selectedFile.status === 'ok'" class="alert alert-success"> Image Uploaded Succesfuly!</div>
+      <div *ngIf="selectedFile.status === 'fail'" class="alert alert-danger"> Image Upload Failed!</div>
+    </div>
+    <br>
+    <mat-form-field appearance="fill">
+      <mat-label>דרגת החשיבות</mat-label>
+      <mat-select formControlName="impor">
+        <mat-option value="1">חשיבות מועטה</mat-option>
+        <mat-option value="2">תשיבות בינונית</mat-option>
+        <mat-option value="3">חשיבות גבוהה</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <br>
+    <button mat-raised-button color="primary" data-toggle="modal" data-target="#myModal">לאשור המודעה</button>
+
+  </form>
+</div>
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">×</button>
+        <h2 class="modal-title">שים לב!!</h2>
+      </div>
+      <div class="modal-body">
+        <p>בלחיצה על אישור מודעתך תוצג בלוח המודעות של הבנין לפי חשיבותה </p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">ביטול</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal" (click)="send()">אישור</button>
+      </div>
+    </div>
+
+  </div>
+</div>

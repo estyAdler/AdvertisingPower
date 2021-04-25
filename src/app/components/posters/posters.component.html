@@ -1,0 +1,203 @@
+<form [formGroup]="posterForm" class="frm">
+    <mat-accordion class="example-headers-align">
+        <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle>
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    לאום
+                </mat-panel-title>
+                <mat-panel-description>
+                    בחר סוג לאום
+                    <mat-icon>group</mat-icon>
+                </mat-panel-description>
+            </mat-expansion-panel-header>
+
+            <mat-form-field appearance="fill">
+                <mat-label>לאום</mat-label>
+                <mat-select formControlName="nation">
+                    <mat-option value="jude">יהודי</mat-option>
+                    <mat-option value="arab">ערבי</mat-option>
+                    <mat-option value="mix">מעורב</mat-option>
+                    <mat-option value="another">אחר</mat-option>
+                </mat-select>
+            </mat-form-field>
+
+
+            <mat-action-row>
+                <button mat-button color="primary" (click)="nextStep()">הבא</button>
+            </mat-action-row>
+        </mat-expansion-panel>
+
+        <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)" hideToggle>
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    מספר שבועות
+                </mat-panel-title>
+                <mat-panel-description>
+                    מספר השבועות שהמודעה תוצג בלוח
+                    <mat-icon>date_range</mat-icon>
+                </mat-panel-description>
+            </mat-expansion-panel-header>
+            
+            <mat-form-field appearance="fill">
+                <mat-label>הכנס מס' שבועות</mat-label>
+                <input matInput type="number" min="1" formControlName="num_week">
+            </mat-form-field>
+            
+            <mat-action-row>
+                <button mat-button color="warn" (click)="prevStep()">הקודם</button>
+                <button mat-button color="primary" (click)="nextStep()">הבא</button>
+            </mat-action-row>
+        </mat-expansion-panel>
+
+        <mat-expansion-panel [expanded]="step === 2" (opened)="setStep(2)" hideToggle>
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    גודל המודעה
+                </mat-panel-title>
+                <mat-panel-description>
+                    גודל המודעה בלוח הפרסום
+                    <mat-icon>aspect_ratio</mat-icon>
+                </mat-panel-description>
+            </mat-expansion-panel-header>
+            <mat-form-field appearance="fill">
+                <mat-label>בחר גודל רצוי</mat-label>
+                <mat-select formControlName="size">
+                    <mat-select-trigger>
+                        {{this.posterForm.controls.size.value ? this.posterForm.controls.size.value : ''}}
+                    </mat-select-trigger>
+                    <mat-option *ngFor="let s of sizeList" [value]="s">{{s}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-action-row>
+                <button mat-button color="warn" (click)="prevStep()">הקודם</button>
+                <button mat-button color="primary" (click)="nextStep()">הבא</button>
+            </mat-action-row>
+        </mat-expansion-panel>
+        <mat-expansion-panel [expanded]="step === 3" (opened)="setStep(3)" hideToggle>
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    ערים
+                </mat-panel-title>
+                <mat-panel-description>
+                    ערים שבהם תתפרסם המודעה
+                    <mat-icon>location_city</mat-icon>
+                </mat-panel-description>
+            </mat-expansion-panel-header>
+            <mat-form-field appearance="fill">
+                <mat-label>בחר ערים רצויות</mat-label>
+                <mat-select formControlName="city" multiple>
+                    <mat-select-trigger>
+                        {{this.posterForm.controls.city.value ? this.posterForm.controls.city.value[0] : ''}}
+                        <span *ngIf="this.posterForm.controls.city.value?.length > 1"
+                            class="example-additional-selection">
+                            (+{{posterForm.controls.city.value.length - 1}}
+                            {{posterForm.controls.city.value?.length === 2 ? 'other' : 'others'}})
+                        </span>
+                    </mat-select-trigger>
+                    <mat-option *ngFor="let c of cityList" [value]="c">{{c}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-action-row>
+                <button mat-button color="warn" (click)="prevStep()">הקודם</button>
+                <button mat-button color="primary" (click)="nextStep()">הבא</button>
+            </mat-action-row>
+        </mat-expansion-panel>
+
+        <mat-expansion-panel [expanded]="step === 4" (opened)="setStep(4)" hideToggle>
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    שפה
+                </mat-panel-title>
+                <mat-panel-description>
+                    השפה בה מוצגת המודעה
+                    <mat-icon>language</mat-icon>
+                </mat-panel-description>
+            </mat-expansion-panel-header>
+            <mat-select formControlName="language">
+                <mat-option value="hebrew">עברית</mat-option>
+                <mat-option value="english">אנגלית</mat-option>
+                <mat-option value="arab">ערבית</mat-option>
+            </mat-select>
+            <mat-action-row>
+                <button mat-button color="warn" (click)="prevStep()">הקודם</button>
+                <button mat-button color="primary" (click)="nextStep()">הבא</button>
+            </mat-action-row>
+        </mat-expansion-panel>
+        <mat-expansion-panel [expanded]="step === 5" (opened)="setStep(5)" hideToggle>
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    הכנס מודעה
+                </mat-panel-title>
+                <mat-panel-description>
+                    בחר את המודעה שלך..........
+                    <mat-icon>attachment</mat-icon>
+                </mat-panel-description>
+            </mat-expansion-panel-header>
+            <button mat-stroked-button (click)="newf()" color="primary">הכנסת מודעה חדשה</button>
+            <button mat-stroked-button (click)="oldf()" color="primary">בחירת מודעה ישנה</button>
+            <div *ngIf="new">
+                <label class="image-upload-container btn btn-bwm">
+                    <span>בחר מודעה</span>
+                    <input #imageInput type="file" accept="image/*" (change)="processFile(imageInput)">
+                </label>
+                <div *ngIf="selectedFile" class="img-preview-container">
+                    <div class="img-preview{{selectedFile.status === 'fail' ? '-error' : ''}}"
+                        [ngStyle]="{'background-image': 'url('+ selectedFile.src + ')'}">
+                    </div>
+                    <div *ngIf="selectedFile.pending" class="img-loading-overlay">
+                        <div class="img-spinning-circle"></div>
+                    </div>
+                    <div *ngIf="selectedFile.status === 'ok'" class="alert alert-success"> Image Uploaded
+                        Succesfuly!</div>
+                    <div *ngIf="selectedFile.status === 'fail'" class="alert alert-danger"> Image Upload Failed!
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="old">
+                <label *ngFor="let p of oldPosters; let i=index">
+                    <mat-card class="example-card">
+                        <img mat-card-image src="{{p.link}}" width="100%">
+                    </mat-card>
+                    <mat-card-actions>
+                        <button mat-button id="p{{i}}" (click)="selctOldPoster(i)">
+                            <mat-icon>check_circle</mat-icon>
+                        </button>
+                    </mat-card-actions>
+                </label>
+            </div>
+
+
+            <mat-action-row>
+                <button mat-button color="warn" (click)="prevStep()">הקודם</button>
+                <button mat-button color="primary" data-toggle="modal" data-target="#myModal">אשור ושליחת
+                    המודעה</button>
+            </mat-action-row>
+        </mat-expansion-panel>
+
+    </mat-accordion>
+</form>
+
+<div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">×</button>
+                <h4 class="modal-title">שים לב!!</h4>
+            </div>
+            <div class="modal-body">
+                <p *ngIf="this.posterForm.valid==false">נא למלא את כל הפרטים!</p>
+                <p *ngIf="this.posterForm.valid">כאשר תלחץ על כפתור אישור מודעתך תשלח לבדיקה במערכת ותקבל הודעה אם אושרה
+                </p>
+            </div>
+            <div *ngIf="this.posterForm.valid" class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">ביטול</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal" (click)="sendData()">אישור</button>
+            </div>
+            <div *ngIf="this.posterForm.valid==false" class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">סגור</button>
+
+            </div>
+        </div>
+
+    </div>
+</div>

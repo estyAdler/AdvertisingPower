@@ -1,0 +1,30 @@
+.example-card {
+    max-width: 200px;
+  }
+ /* .card :hover{
+    transform: rotate(360deg) scale(1.5);
+    transition: all 1s cubic-bezier(.99,.82,.11,1.41);
+    /* transform: rotate(10deg) scale(1); */
+    /* transform: perspective(1000px) rotate(-30deg) skew(25deg) translate(20px, -20px); */
+  
+  .fa-icon-image{
+    color: rgba(31,181,172,.9);
+    display: inline-block;
+      font-style: normal;
+      font-variant: normal;
+      font-weight: normal;
+      line-height: 1;
+      font-size-adjust: none;
+      font-stretch: normal;
+      -moz-font-feature-settings: normal;
+      -moz-font-language-override: normal;
+      text-rendering: auto;
+      transition: all .65s linear 0s;
+      text-align: center;
+      transition: all 1s cubic-bezier(.99,.82,.11,1.41);
+  }
+  .gallery
+  {
+      display: inline-block;
+      margin-top: 20px;
+  }

@@ -1,0 +1,21 @@
+<h1 id="title">כניסת משתמש רשום</h1>
+<div>
+  <form [formGroup]="loginForm" (submit)="checkUser()" class="frm">
+    <div class="example-container">
+      <mat-form-field appearance="fill">
+        <mat-label>קוד משתמש </mat-label>
+        <input matInput formControlName="idUser">
+      </mat-form-field>
+      <br>
+      <mat-form-field appearance="fill">
+        <mat-label>סיסמא</mat-label>
+        <input matInput [type]="hide ? 'password' : 'text'" formControlName="password">
+        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+          [attr.aria-pressed]="hide">
+          <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+      </mat-form-field>
+    </div>
+    <button mat-raised-button color="primary">כניסה</button>
+  </form>
+</div>

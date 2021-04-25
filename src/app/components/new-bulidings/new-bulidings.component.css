@@ -1,0 +1,17 @@
+#table {
+    width:100%;
+    text-align: center;
+    position: relative;
+   
+}
+.th{
+
+    text-align: center;
+}
+table td, th
+{
+   width:150px;
+}
+.btn{
+    background-color: red;
+}

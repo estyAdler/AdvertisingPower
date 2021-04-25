@@ -1,0 +1,129 @@
+<div>
+  <h1 id="title">משתמש חדש</h1>
+  <form [formGroup]="registerForm" (submit)="checkUser()" class="frm">
+
+    <div class="example-container">
+      <mat-form-field appearance="fill">
+        <mat-label>שם משתמש</mat-label>
+        <input matInput formControlName="username">
+      </mat-form-field>
+      <br>
+      <mat-form-field appearance="fill">
+        <mat-label>סיסמא</mat-label>
+        <input matInput [type]="hide ? 'password' : 'text'" formControlName="password">
+        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+          [attr.aria-pressed]="hide">
+          <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+      </mat-form-field>
+      <br>
+      <mat-form-field appearance="fill">
+        <mat-label>אמות סיסמא</mat-label>
+        <input matInput [type]="hide ? 'password' : 'text'" formControlName="verifyPassword">
+        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+          [attr.aria-pressed]="hide">
+          <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+      </mat-form-field>
+      <br>
+      <mat-form-field appearance="fill">
+        <mat-label>סטטוס</mat-label>
+        <mat-select formControlName="status">
+          <mat-option value="builder">ועד בית</mat-option>
+          <mat-option value="bussiness">בעל עסק</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div *ngIf="registerForm.controls['status'].value=='builder'">
+      <mat-form-field appearance="fill">
+        <mat-label>שם ועד בית</mat-label>
+        <input matInput formControlName="buildingName">
+      </mat-form-field>
+      <br>
+      <label>כתובת הבנין</label>
+      <br>
+      <mat-form-field appearance="fill">
+        <mat-label>רחוב</mat-label>
+        <input matInput formControlName="street">
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>מספר בנין</mat-label>
+        <input class="a" matInput formControlName="number">
+        <mat-error *ngIf="registerForm.controls['number'].invalid!=null">ספרות בלבד</mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>עיר</mat-label>
+        <mat-select formControlName="city">
+          <mat-select-trigger>
+            {{this.registerForm.controls.city.value ? this.registerForm.controls.city.value : ''}}
+          </mat-select-trigger>
+          <mat-option *ngFor="let c of cityList" [value]="c">{{c}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <!-- <mat-form-field appearance="fill">
+        <mat-label>עיר</mat-label>
+        <input matInput formControlName="city">
+      </mat-form-field> -->
+      <br>
+      <mat-form-field appearance="fill">
+        <mat-label>מספר דיירים</mat-label>
+        <input matInput formControlName="Numlodgers">
+        <mat-error *ngIf="registerForm.controls['Numlodgers'].invalid">ספרות בלבד</mat-error>
+      </mat-form-field>
+    </div>
+    <div *ngIf="registerForm.controls['status'].value=='bussiness'">
+      <mat-form-field appearance="fill">
+        <mat-label>שם העסק</mat-label>
+        <input matInput formControlName="businessName">
+      </mat-form-field>
+      <br>
+      <mat-form-field appearance="fill">
+        <mat-label>שם בעל העסק</mat-label>
+        <input matInput formControlName="businessOwnerName">
+      </mat-form-field>
+      <br>
+      <mat-form-field appearance="fill">
+        <mat-label>תחום העסק</mat-label>
+        <mat-select formControlName="category">
+          <mat-option *ngFor="let c of categoriesList" [value]="c">{{c}}</mat-option>
+          <!--   <mat-option value="item">כללי</mat-option> -->
+        </mat-select>
+      </mat-form-field>
+
+      <!-- <mat-form-field appearance="fill">
+      <mat-label>Phone number</mat-label>
+      <example-tel-input formControlName="tel" required></example-tel-input>
+      <mat-icon matSuffix>phone</mat-icon>
+      <mat-hint>Include area code</mat-hint>
+    </mat-form-field> -->
+
+    </div>
+    <br>
+    <mat-form-field appearance="fill">
+      <mat-label>הכנס כתובת מייל</mat-label>
+      <input matInput placeholder="pat@example.com" formControlName="email">
+      <mat-error *ngIf="registerForm.controls['email'].invalid">{{getErrorMessage()}}</mat-error>
+    </mat-form-field>
+    <br>
+    <mat-form-field appearance="fill">
+      <mat-label>הכנס מס' טלפון</mat-label>
+      <input matInput placeholder="0527575775" formControlName="tel">
+      <mat-error *ngIf="registerForm.controls['tel'].invalid">מספר טלפון לא חוקי</mat-error>
+    </mat-form-field>
+    <br>
+    <mat-form-field appearance="fill">
+      <mat-label> הכנס מס' טלפון משני</mat-label>
+      <input matInput placeholder="0527575775" formControlName="secondtel">
+      <mat-error *ngIf="registerForm.controls['secondtel'].invalid">מספר טלפון לא חוקי</mat-error>
+    </mat-form-field>
+    <br>
+    <section class="example-section">
+      <mat-checkbox class="example-margin" [color]="color" formControlName="allTrue">אני מאשר שהפרטים נכונים
+      </mat-checkbox>
+      <mat-error *ngIf="registerForm.controls['allTrue'].errors?.required!=null">שדה זה נדרש</mat-error>
+    </section>
+    <br>
+    <button type="submit" mat-raised-button color="primary">כניסה</button>
+    <div>{{message}}</div>
+  </form>
+</div>

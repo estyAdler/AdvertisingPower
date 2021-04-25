@@ -1,0 +1,9 @@
+<div *ngFor="let board of posters;let i=index ">
+    <div class="try" *ngIf="i==(Iindex-1)">
+        <mat-grid-list cols="4" class="example-list-board">
+            <mat-grid-tile *ngFor="let poster of board" [colspan]="poster.col" [rowspan]="poster.rrow">
+                <img src="{{poster.link}}" class="img">
+            </mat-grid-tile>
+        </mat-grid-list>
+    </div>
+</div>

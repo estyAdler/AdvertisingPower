@@ -1,0 +1,22 @@
+<h1 id="title">דוחו"ת חודשיים </h1>
+<div>
+  <form [formGroup]="buildingMonthForm" (submit)="send()" class="frm">
+    <div class="example-container">
+      <mat-form-field appearance="fill">
+        <mat-label>כמות מודעות מודבקות בחודש האחרון</mat-label>
+        <input matInput type="number" min="0" formControlName="numPosters">
+      </mat-form-field>
+      <br>
+      <mat-form-field appearance="fill">
+        <mat-label>שביעות רצון הדיירים</mat-label>
+        <input matInput type="number" min="20" formControlName="satisfaction">%
+      </mat-form-field>
+      <br>
+      <mat-form-field appearance="fill">
+        <mat-label>הערות והארות</mat-label>
+        <textarea matInput formControlName="text"></textarea>
+      </mat-form-field>
+    </div>
+    <button type="submit" mat-raised-button color="primary">לאשור הדו"ח</button>
+  </form>
+</div>
